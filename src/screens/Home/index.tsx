@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
+import { Participant } from '../../components/Participant';
 
 export function Home() {
   function handleParticipantAdd() {
@@ -10,6 +11,8 @@ export function Home() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
+
       <Text style={styles.eventName}>Nome do evento</Text>
       <Text style={styles.eventDate}>Quarta, 14 de fevereiro</Text>
 
@@ -17,14 +20,16 @@ export function Home() {
         <TextInput style={styles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6B6B6B"
+          keyboardAppearance="dark"
         />
 
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
-      
-      <StatusBar style="auto" />
+
+      <Participant />
+      <Participant />
     </View>
   );
 }
