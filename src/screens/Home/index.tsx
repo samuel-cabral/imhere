@@ -17,8 +17,6 @@ export function Home() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-
       <Text style={styles.eventName}>Nome do evento</Text>
       <Text style={styles.eventDate}>Quarta, 14 de fevereiro</Text>
 
