@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, FlatList, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../../components/Participant';
 
 export function Home() {
-  const participants = ['Bobô', 'Ronaldo', 'Rivaldo', 'Cafu', 'Roberto Carlos', 'Dida', 'Ronaldinho', 'Kaká', 'Edmílson', 'Lúcio', 'Juninho Pernambucano', 'Gilberto Silva', 'Ricardinho', 'Denílson', 'Luizão', 'Vampeta', 'Roque Júnior', 'Júnior', 'César Sampaio', 'Marcos'];
+  const [participants, setParticipants] = useState<string[]>(['Ronaldo']);
+  const [newParticipant, setNewParticipant] = useState('');
 
-  function handleParticipantAdd() {
-    if (participants.includes('Ronaldo')) {
-      return Alert.alert('Participante já existe', 'Ronaldo já está na lista de participantes.');
+  function handleParticipantAdd(name: string) {
+    if (participants.includes(name)) {
+      return Alert.alert('Participante já existe', `${name} já está na lista de participantes.`);
     }
-    console.log('Você adicionou um participante!');
+
+    setParticipants((state) => [...state, name]);
   }
 
   function removeParticipant(name: string) {
@@ -41,9 +43,11 @@ export function Home() {
           placeholder="Nome do participante"
           placeholderTextColor="#6B6B6B"
           keyboardAppearance="dark"
+          value={newParticipant}
+          onChange={e => setNewParticipant(e.nativeEvent.text)}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+        <TouchableOpacity style={styles.button} onPress={() => handleParticipantAdd(newParticipant)}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
