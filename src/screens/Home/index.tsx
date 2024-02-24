@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, FlatList, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../../components/Participant';
 
@@ -14,10 +14,12 @@ export function Home() {
     }
 
     setParticipants((state) => [...state, name]);
+    setNewParticipant('');
   }
 
   function removeParticipant(name: string) {
     Alert.alert(`Você removeu o participante ${name}!`);
+    setParticipants((state) => state.filter(participant => participant !== name));
   }
 
   function handleParticipantRemove(name: string) {
@@ -44,7 +46,7 @@ export function Home() {
           placeholderTextColor="#6B6B6B"
           keyboardAppearance="dark"
           value={newParticipant}
-          onChange={e => setNewParticipant(e.nativeEvent.text)}
+          onChangeText={setNewParticipant}
         />
 
         <TouchableOpacity style={styles.button} onPress={() => handleParticipantAdd(newParticipant)}>
