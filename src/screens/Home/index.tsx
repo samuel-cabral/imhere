@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { FlatList, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../../components/Participant';
 
@@ -8,11 +8,27 @@ export function Home() {
   const participants = ['Bobô', 'Ronaldo', 'Rivaldo', 'Cafu', 'Roberto Carlos', 'Dida', 'Ronaldinho', 'Kaká', 'Edmílson', 'Lúcio', 'Juninho Pernambucano', 'Gilberto Silva', 'Ricardinho', 'Denílson', 'Luizão', 'Vampeta', 'Roque Júnior', 'Júnior', 'César Sampaio', 'Marcos'];
 
   function handleParticipantAdd() {
+    if (participants.includes('Ronaldo')) {
+      return Alert.alert('Participante já existe', 'Ronaldo já está na lista de participantes.');
+    }
     console.log('Você adicionou um participante!');
   }
 
-  function handleParticipantRemove() {
-    console.log('Você removeu um participante!');
+  function removeParticipant(name: string) {
+    Alert.alert(`Você removeu o participante ${name}!`);
+  }
+
+  function handleParticipantRemove(name: string) {
+    Alert.alert('Remover participante', `Deseja remover ${name} da lista de participantes?`, [
+      {
+        text: 'Cancelar',
+        style: 'cancel'
+      },
+      {
+        text: 'Remover',
+        onPress: () => removeParticipant(name)
+      }
+    ]);
   }
 
   return (
@@ -39,7 +55,7 @@ export function Home() {
           <Participant
             key={item}
             name={item}
-            onRemove={handleParticipantRemove}
+            onRemove={() => handleParticipantRemove(item)}
           />
         )}
         showsVerticalScrollIndicator={false}
