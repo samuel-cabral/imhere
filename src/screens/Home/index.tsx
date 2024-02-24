@@ -9,6 +9,10 @@ export function Home() {
     console.log('Você adicionou um participante!');
   }
 
+  function handleParticipantRemove() {
+    console.log('Você removeu um participante!');
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -28,8 +32,7 @@ export function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant />
-      <Participant />
+      <Participant name="Bobô" onRemove={handleParticipantRemove} />
     </View>
   );
 }
