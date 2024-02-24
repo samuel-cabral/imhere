@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../../components/Participant';
 
 export function Home() {
+  const participants = ['Bobô', 'Ronaldo', 'Rivaldo', 'Cafu', 'Roberto Carlos', 'Dida', 'Ronaldinho', 'Kaká', 'Edmílson', 'Lúcio', 'Juninho Pernambucano', 'Gilberto Silva', 'Ricardinho', 'Denílson', 'Luizão', 'Vampeta', 'Roque Júnior', 'Júnior', 'César Sampaio', 'Marcos'];
+
   function handleParticipantAdd() {
     console.log('Você adicionou um participante!');
   }
@@ -32,7 +34,15 @@ export function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant name="Bobô" onRemove={handleParticipantRemove} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {participants.map(participant => (
+          <Participant
+            key={participant}
+            name={participant}
+            onRemove={handleParticipantRemove}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 }
